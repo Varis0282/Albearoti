@@ -32,7 +32,7 @@ export default (app) => {
         const result = await BlogCtrl.delete(body);
         res.json(result);
     })
-    app.get('/api/blog/:_id', authentication, async (req, res) => {
+    app.post('/api/blog/:_id', authentication, async (req, res) => {
         const { params } = req;
         const result = await BlogCtrl.getById(params);
         res.json(result);

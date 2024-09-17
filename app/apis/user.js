@@ -28,11 +28,11 @@ export default (app) => {
         const result = await UserCtlr.delete(body);
         res.json(result);
     })
-    app.get('/api/user/me', authentication, async (req, res) => {
+    app.post('/api/user/me', authentication, async (req, res) => {
         const { user } = req;
         res.json({ ...successObj, data: user });
     })
-    app.get('/api/user/:_id', async (req, res) => {
+    app.post('/api/user/:_id', async (req, res) => {
         const { params } = req;
         const result = await UserCtlr.getById(params);
         res.json(result);

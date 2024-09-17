@@ -25,7 +25,7 @@ export const getBlogsList = async (body) => {
 export const getBlogSingle = async (body) => {
     try {
         if (token) {
-            const data = await axios.get(`/api/blog/${body._id}`, { headers });
+            const data = await axios.post(`/api/blog/${body._id}`, { headers });
             return data.data;
         } else {
             return { success: false, message: 'Token not found' };

@@ -26,7 +26,7 @@ export const addUser = async (body) => {
 
 export const getUserByToken = async (token) => {
     try {
-        const data = await axios.get(`/api/user/me`, {
+        const data = await axios.post(`/api/user/me`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
