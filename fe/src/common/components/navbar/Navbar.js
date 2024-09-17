@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { CiSearch } from "react-icons/ci";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { Logo, MaskCopy, MobileLogo, TabLogo } from '../../assets';
@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSearch } from '../../../redux/searchReducer';
 import { setUser } from '../../../redux/userReducer';
 import { setLoading } from '../../../redux/loaderReducer';
+import { getUserByToken } from '../../apis/users';
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -16,6 +18,7 @@ const Navbar = () => {
 
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const fetchAndSetUser = async () => {
     const token = localStorage.getItem('token');
