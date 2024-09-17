@@ -10,7 +10,10 @@ import { setSearch } from '../../../redux/searchReducer';
 
 const Navbar = () => {
 
-  const { user } = useSelector(state => state.users);
+  let { user } = useSelector(state => state.users);
+  if (!user) {
+    user = JSON.parse(localStorage.getItem('user'));
+  }
   const [search, setSearchInLocal] = useState('')
 
   const dispatch = useDispatch();
