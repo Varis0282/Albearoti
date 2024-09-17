@@ -4,7 +4,7 @@ import { baseUrl } from '../../baseURL'
 
 export const loginUser = async (body) => {
     try {
-        const data = await axios.post(`${baseUrl}/user/login`, body);
+        const data = await axios.post(`/user/login`, body);
         return data.data;
     } catch (error) {
         console.log(error);
@@ -15,7 +15,7 @@ export const loginUser = async (body) => {
 
 export const addUser = async (body) => {
     try {
-        const data = await axios.post(`${baseUrl}/user/add`, body);
+        const data = await axios.post(`/user/add`, body);
         return data.data;
     } catch (error) {
         console.log(error);
@@ -26,7 +26,7 @@ export const addUser = async (body) => {
 
 export const getUserByToken = async (token) => {
     try {
-        const data = await axios.get(`${baseUrl}/user/me`, {
+        const data = await axios.get(`/user/me`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
