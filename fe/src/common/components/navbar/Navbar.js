@@ -12,7 +12,10 @@ const Navbar = () => {
 
   let { user } = useSelector(state => state.users);
   if (!user) {
-    user = JSON.parse(localStorage.getItem('user'));
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      user = JSON.parse(storedUser);
+    }
   }
   const [search, setSearchInLocal] = useState('')
 
