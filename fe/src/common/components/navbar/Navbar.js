@@ -5,28 +5,46 @@ import { Logo, MaskCopy, MobileLogo, TabLogo } from '../../assets';
 import { FaChevronLeft } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearch } from '../../../redux/searchReducer';
+import { setUser } from '../../../redux/userReducer';
+import { setLoading } from '../../../redux/loaderReducer';
 
 
 
 const Navbar = () => {
 
   let { user } = useSelector(state => state.users);
-  if (!user) {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      user = JSON.parse(storedUser);
-    }
-  }
-  const [search, setSearchInLocal] = useState('')
+
 
   const dispatch = useDispatch();
+
+  const fetchAndSetUser = async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      dispatch(setLoading(true));
+      const user = await getUserByToken(token);
+      if (user.success) {
+        localStorage.setItem('user', JSON.stringify(user.data));
+        dispatch(setUser(user.data));
+      }
+    } else {
+      navigate('/login');
+    }
+    dispatch(setLoading(false));
+  }
+
+  const [search, setSearchInLocal] = useState('')
+
 
   const handleSearch = (e) => {
     dispatch(setSearch(search));
   }
 
+  useEffect(() => {
+    fetchAndSetUser();
+  }, []);
+
   return (
-    user && <header className="w-full flex md:flex-row lg:flex-row flex-col-reverse bg-white lg:border-b md:border-b lg:p-4 md:p-4 px-4 py-2 md:justify-between lg:justify-between justify-evenly items-start md:h-20 lg:h-20 h-32">
+    <header className="w-full flex md:flex-row lg:flex-row flex-col-reverse bg-white lg:border-b md:border-b lg:p-4 md:p-4 px-4 py-2 md:justify-between lg:justify-between justify-evenly items-start md:h-20 lg:h-20 h-32">
       <div className='flex flex-row justify-between md:pl-3 lg:pl-3 w-full md:w-auto'>
         <div className="justify-center items-center text-[#6C5DD3] w-1/6 text-xl font-bold pl-2 md:flex lg:flex hidden">
           <img src={Logo} alt="Jadwa" className='lg:block md:hidden sm:hidden' />
@@ -64,8 +82,8 @@ const Navbar = () => {
               className="rounded-full w-10 h-10"
             />
             <div className="ml-2 hidden lg:block md:block">
-              <p className="text-sm font-semibold">{user.name}</p>
-              <p className="text-xs text-gray-500">{user.role.slice(0, 1).toUpperCase() + user.role.slice(1, user.role.length)}</p>
+              <p className="text-sm font-semibold">{user?.name || 'UserName'}</p>
+              <p className="text-xs text-gray-500">{user?.role?.slice(0, 1).toUpperCase() + user?.role?.slice(1, user?.role?.length) || 'User'}</p>
             </div>
           </div>
         </div>
