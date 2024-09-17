@@ -12,7 +12,7 @@ const headers = {
 export const getBlogsList = async (body) => {
     try {
         if (token) {
-            const data = await axios.post(`/blog/list`, body, { headers });
+            const data = await axios.post(`/api/blog/list`, body, { headers });
             return data.data;
         } else {
             return { success: false, message: 'Token not found' };
@@ -25,7 +25,7 @@ export const getBlogsList = async (body) => {
 export const getBlogSingle = async (body) => {
     try {
         if (token) {
-            const data = await axios.get(`/blog/${body._id}`, { headers });
+            const data = await axios.get(`/api/blog/${body._id}`, { headers });
             return data.data;
         } else {
             return { success: false, message: 'Token not found' };
@@ -39,7 +39,7 @@ export const getBlogSingle = async (body) => {
 export const updateBlogWithId = async (body) => {
     try {
         if (token) {
-            const data = await axios.put(`/blog/update`, body, { headers });
+            const data = await axios.put(`/api/blog/update`, body, { headers });
             return data.data;
         } else {
             return { success: false, message: 'Token not found' };
@@ -53,7 +53,7 @@ export const updateBlogWithId = async (body) => {
 export const saveNewBlog = async (body) => {
     try {
         if (token) {
-            const data = await axios.post(`/blog/add`, body, { headers });
+            const data = await axios.post(`/api/blog/add`, body, { headers });
             return data.data;
         } else {
             return { success: false, message: 'Token not found' };
@@ -66,7 +66,7 @@ export const saveNewBlog = async (body) => {
 export const publishBlog = async (body) => {
     try {
         if (token) {
-            const data = await axios.put(`/blog/publish`, body, { headers });
+            const data = await axios.put(`/api/blog/publish`, body, { headers });
             return data.data;
         } else {
             return { success: false, message: 'Token not found' };
@@ -79,7 +79,7 @@ export const publishBlog = async (body) => {
 export const deleteBlog = async (body) => {
     try {
         if (token) {
-            const data = await axios.delete(`/blog/delete`, {
+            const data = await axios.delete(`/api/blog/delete`, {
                 headers: headers,
                 data: body
             });
