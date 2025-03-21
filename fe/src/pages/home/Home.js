@@ -54,6 +54,11 @@ const Home = () => {
     if (token) {
       dispatch(setLoading(true));
       const data = await getBlogsList(body);
+      if (data.status === 401) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        navigate('/login');
+      }
       if (data?.success) {
         setBlogs(data?.data);
         message.success(data?.message || 'Blogs fetched successfully');

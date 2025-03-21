@@ -1,16 +1,15 @@
 import axios from "axios";
 import { baseUrl } from '../../baseURL'
 
-const token = localStorage.getItem('token');
-
-const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
-}
 
 
 export const getBlogsList = async (body) => {
     try {
+        const token = localStorage.getItem('token');
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
         if (token) {
             const data = await axios.post(`/api/blog/list`, body, { headers });
             return data.data;
@@ -24,6 +23,11 @@ export const getBlogsList = async (body) => {
 }
 export const getBlogSingle = async (body) => {
     try {
+        const token = localStorage.getItem('token');
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
         if (token) {
             const data = await axios.post(`/api/blog/${body._id}`, {}, { headers });
             return data.data;
@@ -38,6 +42,11 @@ export const getBlogSingle = async (body) => {
 
 export const updateBlogWithId = async (body) => {
     try {
+        const token = localStorage.getItem('token');
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
         if (token) {
             const data = await axios.put(`/api/blog/update`, body, { headers });
             return data.data;
@@ -52,6 +61,11 @@ export const updateBlogWithId = async (body) => {
 
 export const saveNewBlog = async (body) => {
     try {
+        const token = localStorage.getItem('token');
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
         if (token) {
             const data = await axios.post(`/api/blog/add`, body, { headers });
             return data.data;
@@ -65,6 +79,11 @@ export const saveNewBlog = async (body) => {
 }
 export const publishBlog = async (body) => {
     try {
+        const token = localStorage.getItem('token');
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
         if (token) {
             const data = await axios.put(`/api/blog/publish`, body, { headers });
             return data.data;
@@ -78,6 +97,11 @@ export const publishBlog = async (body) => {
 }
 export const deleteBlog = async (body) => {
     try {
+        const token = localStorage.getItem('token');
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
         if (token) {
             const data = await axios.delete(`/api/blog/delete`, {
                 headers: headers,
